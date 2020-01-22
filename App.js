@@ -8,40 +8,39 @@ import Status from './components/Status'
 import Calls from './components/Calls'
 
 export default class Whatsapp extends Component {
-                 componentDidMount() {
-                    Font.loadAsync({
-                      'Roboto_medium': require('./assets/fonts/Roboto_medium.ttf'),
-                    });
-                  }
-                 render() {
-                   
-                   return (
-                     <Container>
-                       <Header hasTabs style={{ backgroundColor: "#128c7e" }}>
-                         <Text>Whatsapp</Text>
-                       </Header>
-                       <Tabs tabStyle={{ backgroundColor: "#128c7e" }}>
-                         <Tab heading="Chats">
-                           <Chats />
-                         </Tab>
-                         <Tab heading="Status">
-                           <Status />
-                         </Tab>
-                         <Tab heading="Calls">
-                           <Calls />
-                         </Tab>
-                       </Tabs>
-                       <Content>
-                         <Text>This is Content Section</Text>
-                       </Content>
-                       <Footer>
-                         <FooterTab>
-                           <Button full>
-                             <Text>Footer</Text>
-                           </Button>
-                         </FooterTab>
-                       </Footer>
-                     </Container>
-                   );
-                 }
-               }
+  state = {
+    loading: true
+  }
+
+async componentDidMount() {
+  await Font.loadAsync({
+    'Roboto': require('native-base/Fonts/Roboto.ttf'),
+    'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+    ...Ionicons.font,
+  })
+  this.setState({ loading: false })
+}
+  render() {
+    
+    return (
+      <Container>
+        <Header hasTabs style={{ backgroundColor: "#075e54" }}>
+          <Left>
+            <Text style={{fontSize:30, color: "#fff"}}>Whatsapp</Text>
+          </Left>
+        </Header>
+        <Tabs tabStyle={{ backgroundColor: "#075e54" }}>
+          <Tab heading="Chats" tabStyle={{ backgroundColor: "#075e54" }}>
+            <Chats />
+          </Tab>
+          <Tab heading="Status" tabStyle={{ backgroundColor: "#075e54" }}>
+            <Status />
+          </Tab>
+          <Tab heading="Calls" tabStyle={{ backgroundColor: "#075e54" }}>
+            <Calls />
+          </Tab>
+        </Tabs>
+      </Container>
+    );
+  }
+}
